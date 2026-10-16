@@ -1,0 +1,33 @@
+<h2>Connexion</h2>
+
+<form (ngSubmit)="soumettre()">
+  <label>
+    E-mail
+    <input
+      type="email"
+      name="email"
+      [ngModel]="email()"
+      (ngModelChange)="email.set($event)"
+      required
+    />
+  </label>
+
+  <label>
+    Mot de passe
+    <input
+      type="password"
+      name="motDePasse"
+      [ngModel]="motDePasse()"
+      (ngModelChange)="motDePasse.set($event)"
+      required
+    />
+  </label>
+
+  @if (erreur(); as message) {
+    <p role="alert" class="erreur">{{ message }}</p>
+  }
+
+  <button type="submit" [disabled]="enCours()">Se connecter</button>
+</form>
+
+<p>Pas encore de compte ? <a routerLink="/inscription">Créer un compte</a></p>

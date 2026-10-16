@@ -1,0 +1,436 @@
+/* ==========================================================================
+   Laboratoire d'analyses — styles globaux
+   Thème sobre bleu / blanc médical
+   ========================================================================== */
+
+/* --- Variables de couleurs et de mise en forme --------------------------- */
+:root {
+  --couleur-primaire: #1d6fb8;
+  --couleur-primaire-fonce: #14568f;
+  --couleur-primaire-clair: #e8f1fa;
+  --couleur-texte: #1f2d3d;
+  --couleur-texte-doux: #5b6b7c;
+  --couleur-fond: #f4f7fa;
+  --couleur-surface: #ffffff;
+  --couleur-bordure: #d7e0ea;
+  --couleur-erreur: #b3261e;
+  --couleur-erreur-fond: #fdecea;
+  --couleur-succes: #1e7e46;
+  --couleur-succes-fond: #e8f6ee;
+
+  --police: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --rayon: 10px;
+  --rayon-petit: 6px;
+  --ombre: 0 1px 3px rgba(16, 42, 67, 0.08), 0 8px 24px rgba(16, 42, 67, 0.06);
+  --ombre-douce: 0 1px 2px rgba(16, 42, 67, 0.08);
+}
+
+/* --- Base et typographie ------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--police);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--couleur-texte);
+  background: var(--couleur-fond);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  color: var(--couleur-primaire-fonce);
+}
+
+h2 {
+  margin: 0 0 1.1rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--couleur-primaire);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+main {
+  display: block;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 1.75rem 1rem 3rem;
+}
+
+/* --- Boutons -------------------------------------------------------------- */
+button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.55rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--couleur-primaire-clair);
+  color: var(--couleur-primaire-fonce);
+  font-weight: 600;
+  line-height: 1.2;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.05s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #d6e7f7;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button[type='submit'] {
+  background: var(--couleur-primaire);
+  color: #fff;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background: var(--couleur-primaire-fonce);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--couleur-primaire);
+  outline-offset: 2px;
+}
+
+/* --- Liens d'action principaux (ex. « Nouveau patient ») ----------------- */
+app-page-liste-patients > a,
+app-page-liste-analyses > a {
+  display: inline-block;
+  margin: 0 0.6rem 0.75rem 0;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--rayon-petit);
+  background: var(--couleur-primaire);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+app-page-liste-patients > a:hover,
+app-page-liste-analyses > a:hover {
+  background: var(--couleur-primaire-fonce);
+  text-decoration: none;
+}
+
+/* --- Formulaires --------------------------------------------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--couleur-texte-doux);
+}
+
+label small {
+  font-weight: 400;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--couleur-texte);
+  background: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-petit);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--couleur-primaire);
+  box-shadow: 0 0 0 3px rgba(29, 111, 184, 0.15);
+  outline: none;
+}
+
+/* --- Messages d'erreur et de succès ------------------------------------- */
+[role='alert'],
+.erreur {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  color: var(--couleur-erreur);
+  background: var(--couleur-erreur-fond);
+  border: 1px solid #f3c9c4;
+  border-radius: var(--rayon-petit);
+  font-size: 0.9rem;
+}
+
+[role='status'],
+.succes {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  color: var(--couleur-succes);
+  background: var(--couleur-succes-fond);
+  border: 1px solid #bfe3cd;
+  border-radius: var(--rayon-petit);
+  font-size: 0.9rem;
+}
+
+/* --- Cartes -------------------------------------------------------------- */
+app-page-connexion,
+app-page-inscription,
+app-page-tableau-de-bord,
+app-page-acces-refuse,
+app-page-formulaire-patient,
+app-page-formulaire-analyse {
+  display: block;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+}
+
+/* Connexion et inscription : carte étroite et centrée */
+app-page-connexion,
+app-page-inscription {
+  max-width: 26rem;
+}
+
+app-page-connexion h2,
+app-page-inscription h2 {
+  text-align: center;
+}
+
+app-page-connexion > p:last-child,
+app-page-inscription > p:last-child {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--couleur-texte-doux);
+}
+
+/* Tableau de bord et accès refusé : carte large */
+app-page-tableau-de-bord,
+app-page-acces-refuse {
+  max-width: 42rem;
+}
+
+app-page-tableau-de-bord nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+app-page-tableau-de-bord form,
+app-page-formulaire-patient form,
+app-page-formulaire-analyse form {
+  max-width: 30rem;
+}
+
+app-page-formulaire-patient form > a,
+app-page-formulaire-analyse form > a {
+  align-self: flex-start;
+}
+
+/* --- Filtres des listes -------------------------------------------------- */
+app-page-liste-patients,
+app-page-liste-analyses {
+  display: block;
+}
+
+app-page-liste-patients > label,
+app-page-liste-analyses > label {
+  display: inline-block;
+  width: auto;
+  margin: 0 0.6rem 0.75rem 0;
+  vertical-align: bottom;
+}
+
+app-page-liste-patients > label input,
+app-page-liste-analyses > label input,
+app-page-liste-analyses > label select {
+  width: 11rem;
+}
+
+app-page-liste-patients > button,
+app-page-liste-analyses > button {
+  margin: 0 0 0.75rem;
+  vertical-align: bottom;
+}
+
+app-page-liste-patients > p,
+app-page-liste-analyses > p {
+  color: var(--couleur-texte-doux);
+}
+
+/* --- Tableaux ------------------------------------------------------------ */
+table {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon);
+  box-shadow: 0 1px 2px rgba(16, 42, 67, 0.06);
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+thead th {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--couleur-primaire-fonce);
+  background: var(--couleur-primaire-clair);
+  border-bottom: 1px solid var(--couleur-bordure);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid #eef2f6;
+  vertical-align: middle;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #f7fafd;
+}
+
+td a {
+  margin-right: 0.6rem;
+  font-weight: 600;
+}
+
+/* Bouton « Supprimer » dans les tableaux : action destructive discrète */
+td button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.82rem;
+  color: var(--couleur-erreur);
+  background: transparent;
+  border-color: #eccac6;
+}
+
+td button:hover:not(:disabled) {
+  background: var(--couleur-erreur-fond);
+}
+
+/* --- Boîte de confirmation de suppression -------------------------------- */
+.confirmation,
+[role='dialog'] {
+  margin-top: 1.25rem;
+  padding: 1rem 1.2rem;
+  background: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-left: 4px solid var(--couleur-erreur);
+  border-radius: var(--rayon-petit);
+  box-shadow: 0 1px 2px rgba(16, 42, 67, 0.06);
+}
+
+.confirmation p {
+  margin: 0 0 0.9rem;
+  font-weight: 600;
+}
+
+.confirmation button {
+  margin-right: 0.5rem;
+}
+
+.confirmation button:first-of-type {
+  color: #fff;
+  background: var(--couleur-erreur);
+}
+
+.confirmation button:first-of-type:hover:not(:disabled) {
+  background: #8f1d17;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 720px) {
+  main {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  app-page-connexion,
+  app-page-inscription,
+  app-page-tableau-de-bord,
+  app-page-acces-refuse,
+  app-page-formulaire-patient,
+  app-page-formulaire-analyse {
+    margin: 1.25rem auto;
+    padding: 1.25rem;
+  }
+
+  app-page-liste-patients > label,
+  app-page-liste-analyses > label {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  app-page-liste-patients > label input,
+  app-page-liste-analyses > label input,
+  app-page-liste-analyses > label select {
+    width: 100%;
+  }
+
+  /* Les tableaux défilent horizontalement plutôt que de casser la mise en page */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  tbody tr:hover {
+    background: transparent;
+  }
+}

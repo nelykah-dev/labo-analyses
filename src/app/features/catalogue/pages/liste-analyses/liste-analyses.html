@@ -1,0 +1,88 @@
+<h2>Catalogue d'analyses</h2>
+
+<a routerLink="/analyses/nouveau">Nouvelle analyse</a>
+
+<label>
+  Recherche
+  <input
+    type="search"
+    name="recherche"
+    placeholder="Nom de l'analyse"
+    [ngModel]="recherche()"
+    (ngModelChange)="recherche.set($event)"
+  />
+</label>
+<label>
+  Unité
+  <select
+    name="unite"
+    [ngModel]="unite()"
+    (ngModelChange)="unite.set($event === '' ? null : $event)"
+  >
+    <option value="">Toutes</option>
+    @for (u of unitesDisponibles(); track u) {
+      <option [value]="u">{{ u }}</option>
+    }
+  </select>
+</label>
+<label>
+  Prix min
+  <input
+    type="number"
+    name="prixMin"
+    [ngModel]="prixMin()"
+    (ngModelChange)="prixMin.set($event === '' ? null : +$event)"
+  />
+</label>
+<label>
+  Prix max
+  <input
+    type="number"
+    name="prixMax"
+    [ngModel]="prixMax()"
+    (ngModelChange)="prixMax.set($event === '' ? null : +$event)"
+  />
+</label>
+<button type="button" (click)="reinitialiser()">Réinitialiser les filtres</button>
+
+@if (chargement()) {
+  <p>Chargement…</p>
+} @else if (analysesAffichees().length === 0) {
+  <p>Aucune analyse ne correspond aux critères.</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Unité</th>
+        <th>Type d'échantillon</th>
+        <th>Valeurs de référence</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (analyse of analysesAffichees(); track analyse.id) {
+        <tr>
+          <td>{{ analyse.nom }}</td>
+          <td>{{ analyse.unite }}</td>
+          <td>{{ analyse.typeEchantillon }}</td>
+          <td>{{ analyse.refMin }} – {{ analyse.refMax }}</td>
+          <td>{{ analyse.prix }}</td>
+          <td>
+            <a [routerLink]="['/analyses', analyse.id, 'modifier']">Modifier</a>
+            <button type="button" (click)="demanderSupprimer(analyse)">Supprimer</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@if (analyseASupprimer(); as analyse) {
+  <div role="dialog" class="confirmation">
+    <p>Supprimer l'analyse {{ analyse.nom }} ?</p>
+    <button type="button" (click)="confirmerSupprimer()">Confirmer la suppression</button>
+    <button type="button" (click)="annulerSupprimer()">Annuler</button>
+  </div>
+}

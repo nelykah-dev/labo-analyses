@@ -1,0 +1,44 @@
+<h2>Créer un compte</h2>
+
+<form (ngSubmit)="soumettre()">
+  <label>
+    E-mail
+    <input
+      type="email"
+      name="email"
+      [ngModel]="email()"
+      (ngModelChange)="email.set($event)"
+      required
+    />
+  </label>
+
+  <label>
+    Mot de passe <small>(8 caractères minimum)</small>
+    <input
+      type="password"
+      name="motDePasse"
+      [ngModel]="motDePasse()"
+      (ngModelChange)="motDePasse.set($event)"
+      required
+    />
+  </label>
+
+  <label>
+    Confirmation du mot de passe
+    <input
+      type="password"
+      name="confirmation"
+      [ngModel]="confirmation()"
+      (ngModelChange)="confirmation.set($event)"
+      required
+    />
+  </label>
+
+  @if (erreur(); as message) {
+    <p role="alert" class="erreur">{{ message }}</p>
+  }
+
+  <button type="submit" [disabled]="enCours()">S'inscrire</button>
+</form>
+
+<p>Déjà inscrit ? <a routerLink="/connexion">Se connecter</a></p>

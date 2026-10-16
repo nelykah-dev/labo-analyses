@@ -1,0 +1,22 @@
+<header>
+  <h1>Laboratoire d'analyses</h1>
+  @if (auth.connecte()) {
+    <nav>
+      <a routerLink="/tableau-de-bord">Tableau de bord</a>
+      @if (peutVoir('/patients')) {
+        <a routerLink="/patients">Patients</a>
+      }
+      @if (peutVoir('/analyses')) {
+        <a routerLink="/analyses">Catalogue</a>
+      }
+      <span class="utilisateur">
+        {{ auth.utilisateur()?.email }} · {{ auth.utilisateur()?.role }}
+      </span>
+      <button type="button" (click)="auth.deconnecter()">Se déconnecter</button>
+    </nav>
+  }
+</header>
+
+<main>
+  <router-outlet />
+</main>

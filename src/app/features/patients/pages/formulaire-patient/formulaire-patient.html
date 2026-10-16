@@ -1,0 +1,54 @@
+<h2>{{ id() ? 'Modifier un patient' : 'Nouveau patient' }}</h2>
+
+<form (ngSubmit)="soumettre()">
+  <label>
+    Nom
+    <input
+      type="text"
+      name="nom"
+      [ngModel]="nom()"
+      (ngModelChange)="nom.set($event)"
+      required
+    />
+  </label>
+  <label>
+    Prénom
+    <input
+      type="text"
+      name="prenom"
+      [ngModel]="prenom()"
+      (ngModelChange)="prenom.set($event)"
+      required
+    />
+  </label>
+  <label>
+    Date de naissance
+    <input
+      type="date"
+      name="dateNaissance"
+      [ngModel]="dateNaissance()"
+      (ngModelChange)="dateNaissance.set($event)"
+      required
+    />
+  </label>
+  <label>
+    Numéro de dossier
+    <input
+      type="text"
+      name="numeroDossier"
+      [ngModel]="numeroDossier()"
+      (ngModelChange)="numeroDossier.set($event)"
+      required
+    />
+  </label>
+
+  @for (erreur of erreurs(); track erreur) {
+    <p role="alert" class="erreur">{{ erreur }}</p>
+  }
+  @if (messageSucces(); as message) {
+    <p role="status" class="succes">{{ message }}</p>
+  }
+
+  <button type="submit" [disabled]="enCours()">Enregistrer</button>
+  <a routerLink="/patients">Annuler</a>
+</form>
